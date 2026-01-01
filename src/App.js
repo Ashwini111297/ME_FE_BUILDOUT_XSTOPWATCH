@@ -5,7 +5,7 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    let timer = null;
+    let timer;
 
     if (isRunning) {
       timer = setInterval(() => {
@@ -13,9 +13,7 @@ function App() {
       }, 1000);
     }
 
-    return () => {
-      if (timer) clearInterval(timer);
-    };
+    return () => clearInterval(timer);
   }, [isRunning]);
 
   const handleStartStop = () => {
@@ -38,8 +36,8 @@ function App() {
     <div>
       <h1>Stopwatch</h1>
 
-      <h2>Time</h2>
-      <p>{formattedTime}</p>
+      {/* 🔥 THIS LINE IS THE KEY FIX */}
+      <p>Time: {formattedTime}</p>
 
       <button onClick={handleStartStop}>
         {isRunning ? "Stop" : "Start"}
